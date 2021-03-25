@@ -11,6 +11,10 @@ function open_redis()
     if not ok then
         log(ERR, "failed to connect: ", err)
     end
+    if config["redis_pass"] ~= 'config_redis_pass' then
+        red:auth(config["redis_pass"])
+    end
+    red:select(config["redis_db"])
     return red, err
 end
 

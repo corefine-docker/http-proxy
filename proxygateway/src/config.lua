@@ -8,6 +8,8 @@ config['mysql_db'] =   "config_mysql_db"
 -- 如果开启限流需要正确配置redis
 config["redis_host"] = "config_redis_host"
 config["redis_port"] = "config_redis_port"
+config["redis_pass"] = "config_redis_pass"
+config["redis_db"] = "config_redis_db"
 
 config['admin_name'] = "admin"
 config['admin_pass'] = "config_admin_pass"

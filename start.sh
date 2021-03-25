@@ -12,13 +12,24 @@ fi
 if [ ! $REDIS_PORT ];then
   REDIS_PORT=6379
 fi
+if [ ! $REDIS_DB ];then
+  REDIS_DB=7
+fi
+
+if [ $REDIS_PASS ];then
+  sed -i "s/config_redis_pass/$REDIS_PASS/" /usr/local/openresty/nginx/proxygateway/src/config.lua
+fi
+
 sed -i "s/config_mysql_host/$MYSQL_HOST/" /usr/local/openresty/nginx/proxygateway/src/config.lua
 sed -i "s/config_mysql_port/$MYSQL_PORT/" /usr/local/openresty/nginx/proxygateway/src/config.lua
 sed -i "s/config_mysql_user/$MYSQL_USER/" /usr/local/openresty/nginx/proxygateway/src/config.lua
 sed -i "s/config_mysql_pass/$MYSQL_PASS/" /usr/local/openresty/nginx/proxygateway/src/config.lua
 sed -i "s/config_mysql_db/$MYSQL_DB/"     /usr/local/openresty/nginx/proxygateway/src/config.lua
+
 sed -i "s/config_redis_host/$REDIS_HOST/" /usr/local/openresty/nginx/proxygateway/src/config.lua
 sed -i "s/config_redis_port/$REDIS_PORT/" /usr/local/openresty/nginx/proxygateway/src/config.lua
+sed -i "s/config_redis_db/$REDIS_DB/" /usr/local/openresty/nginx/proxygateway/src/config.lua
+
 sed -i "s/config_admin_pass/$ADMIN_PASS/" /usr/local/openresty/nginx/proxygateway/src/config.lua
 
 /usr/local/openresty/nginx/sbin/nginx -g 'daemon off;'
