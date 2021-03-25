@@ -1,0 +1,36 @@
+<section class="content-header">
+ <h1>编辑域名</h1>
+</section>
+<section class="content">
+ <!-- /.row -->
+ <div class="row">
+  <div class="col-xs-12">
+   <div class="box box-primary">
+     <div class="box-body">
+      <div class="form-group">
+       <label for="name">域名地址</label>
+       <input type="text" class="form-control" name="name" placeholder="域名地址">
+      </div>
+     </div>
+     <!-- /.box-body -->
+     <div class="box-footer">
+      <button id="add-domain-btn" class="btn btn-primary">编辑</button>
+     </div>
+   </div>
+   <!-- /.box -->
+  </div>
+ </div>
+</section>
+<script type="text/javascript">
+    $("input[name='name']").val(domain_name);
+    $("#add-domain-btn").click(function(){
+        api_invoke("/api/v1/domain/update", {domain_id:domain_id,name:$("input[name='name']").val()}, function(data){
+            if(data.errno == 0){
+                load_page("/pages/domain/list.html");
+                update_menu();
+            }else{
+                alert(data.msg);
+            }
+        });
+    });
+</script>
